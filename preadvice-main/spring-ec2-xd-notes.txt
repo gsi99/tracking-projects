@@ -1,0 +1,2 @@
+D:\git\spring-xd-ec2 has changes to build the distribution and load up to ec2. 
+Currently have error in running the build - see the readme file in the project dir.

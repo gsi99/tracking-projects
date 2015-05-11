@@ -1,0 +1,7 @@
+Created events keyspace on cluster created with ccm (node_3node).
+
+To do next:
+	Write tests and code to 
+		connect to Cassandra,
+		read / write / update as per the current repository i/f (proabably will need to create an implmentation of the repos i/f and use a Cassanra specific i/f within this implemnentation).
+
