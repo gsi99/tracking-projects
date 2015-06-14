@@ -16,7 +16,7 @@ file:///D:/spring/spring-xd-1.0.0.M4/docs/index.html#jms
 
 Copied trackedeventsplitter.xml and trackedeventtransformer.xml to D:\spring\spring-xd-1.0.0.M4\xd\modules\processor
 
-xd:> stream create --name trackscans --definition "jms | trackedeventsplitter | trackedeventtransformer | scanprocessor | log"
+xd:> stream create --name trackscans --definition "jms | trackedeventsplitter | trackedeventtransformer | mailitemeventProcessor | log"
 
 
 Then create
