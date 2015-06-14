@@ -1,4 +1,4 @@
-This replaces the pre-advice-main-original. Its on github remote at second-sandpit.
+This replaces the pre-advice-main-original. Its on github remote at tracking-projects-master.
 
 Copied preadvicesplitter.xml and preadvicetransformer.xml to D:\spring\spring-xd-1.0.0.M4\xd\modules\processor
 
