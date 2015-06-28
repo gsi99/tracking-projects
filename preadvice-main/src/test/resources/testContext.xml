@@ -9,7 +9,7 @@
 
 	<context:property-placeholder location="classpath:preadvice.properties"/> 
 	
-	<import resource="classpath:testContext-cassandra.xml"/>
+<!-- 	<import resource="classpath:testContext-cassandra.xml"/> -->
 	<import resource="classpath:testContext-mySql.xml"/>
 
 	<bean id="mailItemStatusMap" name="statusMap"
