@@ -212,8 +212,13 @@ public class Ec2Installer {
 
 	    while (e.hasMoreElements()) {
 	      String key = (String) e.nextElement();
-	      System.out.println(key + " -- " + props.getProperty(key));
-	      LOGGER.info("Properties used are:" + key + " -- " + props.getProperty(key));
+	      if (key.equalsIgnoreCase("aws-secret-key")) {
+	    	  System.out.println(key + " -- " + "hidden");
+	    	  LOGGER.info("Properties used are:" + key + " -- " + "hidden");
+	      } else {
+	    	  System.out.println(key + " -- " + props.getProperty(key));
+	    	  LOGGER.info("Properties used are:" + key + " -- " + props.getProperty(key));
+	      }
 	    }
 		
 		

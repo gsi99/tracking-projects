@@ -36,15 +36,18 @@ public class TestAWSInstanceConfigurer {
 	@Value("${xd-dist-url}")
 	private String xdDistUrl;
 
-	private static final String XD_HOME_VALUE = "export XD_HOME=\"/home/ubuntu/spring-xd-X.X.X.BUILD-SNAPSHOT\"";
+	// private static final String XD_HOME_VALUE = "export XD_HOME=\"/home/ubuntu/spring-xd-X.X.X.BUILD-SNAPSHOT\"";
+	private static final String XD_HOME_VALUE = "export XD_HOME=\"/home/centos/spring-xd-X.X.X.BUILD-SNAPSHOT\"";
 
-	private static final String WGET_COMMAND = "/usr/local/bin/wget -P /home/ubuntu/ http://repo.springsource.org/libs-snapshot-local/org/springframework/xd/spring-xd/X.X.X.BUILD-SNAPSHOT/spring-xd-1.0.0.XXXX-20131024.235055-1.zip";
+	//private static final String WGET_COMMAND = "/usr/local/bin/wget -P /home/ubuntu/ http://repo.springsource.org/libs-snapshot-local/org/springframework/xd/spring-xd/X.X.X.BUILD-SNAPSHOT/spring-xd-1.0.0.XXXX-20131024.235055-1.zip";
+	private static final String WGET_COMMAND = "wget -P /home/centos/ http://repo.springsource.org/libs-snapshot-local/org/springframework/xd/spring-xd/X.X.X.BUILD-SNAPSHOT/spring-xd-1.0.0.XXXX-20131024.235055-1.zip";
 
 	private static final String REDIS_INIT_VALUE = "/etc/init.d/redis-server start";
 
 	private static final String RABBIT_INIT_VALUE = "/etc/init.d/rabbitmq-server start";
 
-	private static final String UNZIP_COMMAND = "unzip /home/ubuntu/spring-xd-1.0.0.XXXX-20131024.235055-1.zip -d /home/ubuntu/";
+	//private static final String UNZIP_COMMAND = "unzip /home/ubuntu/spring-xd-1.0.0.XXXX-20131024.235055-1.zip -d /home/ubuntu/";
+	private static final String UNZIP_COMMAND = "unzip /home/centos/spring-xd-1.0.0.XXXX-20131024.235055-1.zip -d /home/centos/";
 
 	private static final String REDIS_CONFIG = "--spring_redis_address=host:7878";
 
