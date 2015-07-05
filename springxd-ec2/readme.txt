@@ -24,9 +24,16 @@ http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.h
 http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingPolicies.html
 http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html
 
-Use the policy simulator to check if the changes allow the user to perform RunInstances action.
+Latest: 1st July 2015. Added Group to Parcels user, gave group full ec2 access. Simulation now show user can run instance. Running run as->maven test in eclipse
+gives error as below:
+	Tests in error: 
+  		testDeployment(org.springframework.xd.ec2.Ec2InstallerTest): The security group 'CentOS 7 -x86_64- with Updates HVM-7 2014-09-29-AutogenByAWSMP-1' does not exist in default VPC 'vpc-582afb3d'
+
+
+Use the policy simulator to check if the changes allow the user to perform RunInstances action - Done this (see above)
 https://policysim.aws.amazon.com/home/index.jsp?#
 
+Below is old:
 D:\tmp\spring-xd-ec2-1.0>.\bin\spring-xd-ec2.bat
                  __   _______         ______ _____ ___    _____           _        _ _
                  \ \ / /  __ \       |  ____/ ____|__ \  |_   _|         | |      | | |

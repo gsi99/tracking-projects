@@ -18,7 +18,9 @@ package org.springframework.xd.ec2.cloud;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.inject.Module;
+
 import org.jclouds.ContextBuilder;
 import org.jclouds.aws.ec2.AWSEC2Api;
 import org.jclouds.compute.ComputeService;
@@ -31,6 +33,7 @@ import org.jclouds.ec2.domain.Reservation;
 import org.jclouds.ec2.domain.RunningInstance;
 import org.jclouds.http.handlers.BackoffLimitedRetryHandler;
 import org.jclouds.io.payloads.FilePayload;
+import org.jclouds.logging.slf4j.config.SLF4JLoggingModule;
 import org.jclouds.sshj.SshjSshClient;
 import org.jclouds.sshj.config.SshjSshClientModule;
 import org.slf4j.Logger;
@@ -116,8 +119,12 @@ public class AWSDeployer implements Deployer {
 	 */
 	public AWSDeployer(Properties properties) {
 		Assert.notNull(properties, "properties can not be null");
-		Iterable<Module> modules = ImmutableSet
-				.<Module> of(new SshjSshClientModule());
+		Iterable<Module> modules = new ImmutableSet.Builder<Module>()
+	           .add(new SshjSshClientModule())
+	           .add(new SLF4JLoggingModule())
+	           .build();
+		//Iterable<Module> modules = ImmutableSet
+		//		.<Module> of(new SshjSshClientModule());
 		clusterName = properties.getProperty("cluster-name");
 		privateKeyFile = properties.getProperty("private-key-file");
 		multiNode = properties.getProperty("multi-node");
@@ -139,6 +146,7 @@ public class AWSDeployer implements Deployer {
 
 		client = ContextBuilder.newBuilder("aws-ec2")
 				.credentials(awsAccessKey, awsSecretKey)
+				.modules(modules)
 				.buildApi(AWSEC2Api.class);
 		instanceChecker = new AWSInstanceChecker(properties, client,
 				computeService);
