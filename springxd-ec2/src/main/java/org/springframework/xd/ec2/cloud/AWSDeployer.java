@@ -217,11 +217,13 @@ public class AWSDeployer implements Deployer {
 		LOGGER.info(HIGHLIGHT);
 		
 		String createdStartXDResourcesScript = configurer.createStartXDResourcesScript();
+		LOGGER.info("Running Instance");
 		Reservation<? extends RunningInstance> reservation = instanceProvisioner.runInstance(createdStartXDResourcesScript, 1);
 		RunningInstance instance = Iterables.getOnlyElement(reservation);
 		
 //		RunningInstance instance = Iterables.getOnlyElement(instanceProvisioner
 //				.runInstance(configurer.createStartXDResourcesScript(), 1));
+		LOGGER.info("Waiting for InstanceToBeProvisioned");
 		if (instanceChecker.waitForInstanceToBeProvisioned(instance, instanceProvisionWaitTime)) {
 			throw new ServerFailStartException("Instance " + instance.getId()
 					+ " did not get into a running state before timeout of " + instanceProvisionWaitTime);

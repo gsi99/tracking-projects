@@ -29,6 +29,31 @@ gives error as below:
 	Tests in error: 
   		testDeployment(org.springframework.xd.ec2.Ec2InstallerTest): The security group 'CentOS 7 -x86_64- with Updates HVM-7 2014-09-29-AutogenByAWSMP-1' does not exist in default VPC 'vpc-582afb3d'
 
+Latest: 14th July 2015. Set the security group to default (this is what the default is in the US west 2 region). Also created a key pair for the EC2 region. 
+Still getting an authorisation error
+org.jclouds.rest.AuthorizationException: POST https://ec2.us-west-2.amazonaws.com/ HTTP/1.1 -> HTTP/1.1 401 Unauthorized
+...
+Caused by: org.jclouds.http.HttpResponseException: request: POST https://ec2.us-west-2.amazonaws.com/ HTTP/1.1  [Action=RunInstances
+&ImageId=ami-c7d092f7
+&InstanceType=t2.micro
+&KeyName=parcels-dev
+&MaxCount=1
+&MinCount=1
+&Placement.AvailabilityZone=us-west-2b
+&SecurityGroup.1=default
+&Signature=IvkvjuXfq6BlSAL4HpHIHKElaTs0xg1ygldACkPGHDo%3D
+&SignatureMethod=HmacSHA256
+&SignatureVersion=2
+&Timestamp=2015-07-14T20%3A46%3A06.889Z
+&UserData=IyEvYmluL2Jhc2gKc2V0ICt1CnNob3B0IC1zIHhwZ19lY2hvCnNob3B0IC1zIGV4cGFuZF9hbGlhc2VzCnVuc2V0IFBBVEggSkFWQV9IT01FIExEX0xJQlJBUllfUEFUSApmdW5jdGlvbiBhYm9ydCB7CiAgIGVjaG8gImFib3J0aW5nOiAkQCIgMT4mMgogICBleGl0IDEKfQpmdW5jdGlvbiBkZWZhdWx0IHsKICAgZXhwb3J0IFhEX0hPTUU9Ii9ob21lL2NlbnRvcy9zcHJpbmcteGQtMS4wLjIuQlVJTEQtU05BUFNIT1QiCiAgIHJldHVybiAkPwp9CmV4cG9ydCBQQVRIPS91c3IvdWNiL2JpbjovYmluOi9zYmluOi91c3IvYmluOi91c3Ivc2JpbgovZXRjL2luaXQuZC9yZWRpcy1zZXJ2ZXIgc3RhcnQKL2V0Yy9pbml0LmQvcmFiYml0bXEtc2VydmVyIHN0YXJ0Ci9ob21lL3VidW50dS9zdGFydFpvb0tlZXBlci5zaApleGl0ICQ/Cg%3D%3D
+&Version=2012-06-01
+&AWSAccessKeyId=AKIAJP2LC5IPI7TDUB6Q] failed with response: HTTP/1.1 401 Unauthorized
+	at org.jclouds.aws.handlers.ParseAWSErrorFromXmlContent.handleError(ParseAWSErrorFromXmlContent.java:65)
+	... 38 more
+
+	
+
+
 
 Use the policy simulator to check if the changes allow the user to perform RunInstances action - Done this (see above)
 https://policysim.aws.amazon.com/home/index.jsp?#

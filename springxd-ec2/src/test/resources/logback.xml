@@ -37,6 +37,14 @@
 			<Pattern>%d %-5p [%c] [%thread] %m%n</Pattern>
 		</encoder>
 	</appender>
+	
+	<appender name="TEST-FILE" class="ch.qos.logback.core.FileAppender">
+		<file>log/test.log</file>
+
+		<encoder>
+			<Pattern>%d %-5p [%c] [%thread] %m%n</Pattern>
+		</encoder>
+	</appender>	
 
 	<root>
 		<level value="info" />
@@ -71,4 +79,10 @@
 		<level value="DEBUG" />
 		<appender-ref ref="SSHFILE" />
 	</logger>
+	
+	<logger name="org.springframework.xd.ec2">
+		<level value="DEBUG" />
+		<appender-ref ref="TEST-FILE" />
+	</logger>	
+	
 </configuration>
