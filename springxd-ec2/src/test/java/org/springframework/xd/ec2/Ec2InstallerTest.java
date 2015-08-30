@@ -75,8 +75,8 @@ public class Ec2InstallerTest {
 		final Properties properties = installer.getProperties();
 		//String awsAccessKey = getConsoleValue("Enter your aws-access-key: ");
 		//String awsSecretKey = getConsoleValue("Enter your aws-secret-key: ");
-		String awsAccessKey = "AKIAJP2LC5IPI7TDUB6Q";
-		String awsSecretKey = "+YwxAExU8GajIa6chpU6C+6kn5iYCqELYDpMXNQ9";
+		String awsAccessKey = "";
+		String awsSecretKey = "";
 
 		properties.setProperty("aws-access-key", awsAccessKey);
 		properties.setProperty("aws-secret-key", awsSecretKey);
