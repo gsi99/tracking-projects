@@ -530,7 +530,7 @@ public class AWSDeployer implements Deployer {
 		final com.google.common.net.HostAndPort socket = com.google.common.net.HostAndPort
 				.fromParts(host, 22);
 		final SshjSshClient client = new SshjSshClient(
-				new BackoffLimitedRetryHandler(), socket, credential, 5000);
+				new BackoffLimitedRetryHandler(), socket, credential, 5000, null);
 		final FilePayload payload = new FilePayload(file);
 		client.put(UBUNTU_HOME + "deploy.jar", payload);
 	}
