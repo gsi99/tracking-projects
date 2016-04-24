@@ -5,11 +5,15 @@ import static org.jclouds.ec2.options.RunInstancesOptions.Builder.asType;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.xd.ec2.Ec2InstallerTest;
 import org.jclouds.ContextBuilder;
 import org.jclouds.aws.ec2.AWSEC2Api;
 import org.jclouds.aws.ec2.features.AWSInstanceApi;
 import org.jclouds.compute.ComputeService;
 import org.jclouds.compute.ComputeServiceContext;
+import org.jclouds.compute.RunNodesException;
 import org.jclouds.compute.domain.ComputeMetadata;
 import org.jclouds.ec2.options.RunInstancesOptions;
 import org.jclouds.logging.slf4j.config.SLF4JLoggingModule;
@@ -19,6 +23,8 @@ import com.google.common.collect.ImmutableSet;
 import com.google.inject.Module;
 
 public class MyTryoutApp {
+	
+	static final Logger LOGGER = LoggerFactory.getLogger(MyTryoutApp.class);
 
 	public static void main(String[] args) {
 
@@ -30,11 +36,16 @@ public class MyTryoutApp {
 		String zone = "us-west-2b";
 		String ami = "ami-c7d092f7";
 		int numberNodes = 1;
-		String securityGroup = "default";
+		String securityGroup = "sg-17620d72";
 
 		//listNodes(accesskeyid, secretkey);
 
-		//runInstance(accesskeyid, secretkey);
+//		try {
+//			//runInstance(accesskeyid, secretkey);
+//		} catch (RunNodesException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		Iterable<Module> modules = new ImmutableSet.Builder<Module>()
 		           .add(new SshjSshClientModule())
@@ -42,7 +53,7 @@ public class MyTryoutApp {
 		           .build();
 		
 		AWSEC2Api client = ContextBuilder.newBuilder("aws-ec2")
-				.credentials(accesskeyid, accesskeyid)
+				.credentials(accesskeyid, secretkey)
 				.modules(modules)
 				.buildApi(AWSEC2Api.class);
 		
@@ -50,17 +61,20 @@ public class MyTryoutApp {
 		RunInstancesOptions	instancesOptions = asType("t2.micro");
 		instancesOptions = instancesOptions.withKeyName(accesskeyid);
 		instancesOptions = instancesOptions.withSecurityGroup(securityGroup);
+		
 		//instancesOptions = instancesOptions.withUserData(script.getBytes());
 		
 
-		client.getInstanceApi().get().runInstancesInRegion(region, zone, ami, numberNodes, numberNodes, instancesOptions);
+		instanceApi.runInstancesInRegion(region, zone, ami, numberNodes, numberNodes, instancesOptions);
 	}
 
-	private static void runInstance(String accesskeyid, String secretkey) {
+	private static void runInstance(String accesskeyid, String secretkey) throws RunNodesException {
 		ComputeServiceContext context = ContextBuilder.newBuilder("aws-ec2")
-				.credentials(accesskeyid, accesskeyid)
+				.credentials(accesskeyid, secretkey)
 				.buildView(ComputeServiceContext.class);
 		ComputeService computeService = context.getComputeService();
+		
+		computeService.createNodesInGroup("xdserver", 1);
 	}
 
 	private static void listNodes(String accesskeyid, String secretkey) {
@@ -72,6 +86,8 @@ public class MyTryoutApp {
 
 		for (Iterator iterator = nodeList.iterator(); iterator.hasNext();) {
 			ComputeMetadata computeMetadata = (ComputeMetadata) iterator.next();
+			LOGGER.info("List of nodes is below");
+			LOGGER.info(computeMetadata.getName());
 			System.out.println("List of nodes is below");
 			System.out.println(computeMetadata.getName());
 		}
